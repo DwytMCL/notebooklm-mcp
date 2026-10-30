@@ -1,6 +1,6 @@
 {
-  "name": "notebooklm-mcp",
-  "version": "1.0.0",
+  "name": "notebooklm-browser-mcp",
+  "version": "0.2.0",
   "description": "MCP server that lets Claude and other AI agents use Google NotebookLM (Gemini Notebook) through a real browser, with a free account",
   "main": "server.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "zod": "^4.6.7"
   },
   "bin": {
-    "notebooklm-mcp": "server.js"
+    "notebooklm-browser-mcp": "server.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,10 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "files": [
+    "server.js",
+    "README.md",
+    "LICENSE"
+  ]
 }

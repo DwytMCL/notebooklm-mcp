@@ -13,6 +13,18 @@ The agent reads the page fresh before each step, so it keeps working when Google
 
 ## Tools
 
+Shortcuts for common jobs (they fall back to the general tools if the site changes too much):
+
+| Tool | What it does |
+| --- | --- |
+| `nlm_list_notebooks` | List your notebooks with their URLs |
+| `nlm_create_notebook` | Create a notebook, optionally with a title |
+| `nlm_ask` | Ask a notebook (by title, id or URL) a question and return the finished answer |
+| `nlm_add_source` | Add website/YouTube URLs, pasted text and/or local files as sources |
+| `nlm_download` | Click a download button or menu item and save the file (default `~/Downloads/NotebookLM`) |
+
+General tools, which work on any page:
+
 | Tool | What it does |
 | --- | --- |
 | `nlm_snapshot` | Accessibility tree of the page: every element's role, name and text |
@@ -30,18 +42,16 @@ with citations, and make Studio content (Audio Overviews, slides, mind maps, qui
 
 ## Setup
 
-Needs Node.js 18+ and Google Chrome (or any Chrome/Chromium; see `NLM_CHROME` below).
+Needs Node.js 18+ and a Chrome-type browser. It uses, in order: `NLM_CHROME`, an installed Google
+Chrome or Chromium, or a Chromium downloaded by Playwright (`npx playwright install chromium`).
 
-```bash
-git clone https://github.com/DwytMCL/notebooklm-mcp.git
-cd notebooklm-mcp
-npm install
-```
+The commands below use the npm package `notebooklm-browser-mcp`. You can also run it straight from
+GitHub by writing `github:DwytMCL/notebooklm-mcp` in its place.
 
 Sign in to Google once. This opens a separate Chrome window with its own profile:
 
 ```bash
-node server.js login
+npx -y notebooklm-browser-mcp login
 ```
 
 Sign in, check your notebooks load, then **quit that window** (Cmd+Q / close all windows).
@@ -50,7 +60,7 @@ The server cannot attach while the sign-in window is still open.
 ### Claude Code
 
 ```bash
-claude mcp add -s user notebooklm -- node /absolute/path/to/notebooklm-mcp/server.js
+claude mcp add -s user notebooklm -- npx -y notebooklm-browser-mcp
 ```
 
 ### Claude Desktop
@@ -61,14 +71,24 @@ Add to `claude_desktop_config.json` and restart Claude Desktop:
 {
   "mcpServers": {
     "notebooklm": {
-      "command": "node",
-      "args": ["/absolute/path/to/notebooklm-mcp/server.js"]
+      "command": "npx",
+      "args": ["-y", "notebooklm-browser-mcp"]
     }
   }
 }
 ```
 
-Check it works with `npm test` (starts the server, lists the tools and opens NotebookLM).
+### From source
+
+```bash
+git clone https://github.com/DwytMCL/notebooklm-mcp.git
+cd notebooklm-mcp
+npm install
+node server.js login
+npm test   # starts the server, lists the tools and opens NotebookLM
+```
+
+Then use `node /absolute/path/to/notebooklm-mcp/server.js` as the command instead of `npx`.
 
 ## Settings
 
@@ -79,6 +99,7 @@ All optional, set as environment variables:
 | `NLM_CHROME` | Google Chrome, else Playwright's Chromium | Path to the Chrome/Chromium binary |
 | `NLM_PROFILE` | `~/.notebooklm-mcp/profile` | Browser profile holding your Google sign-in |
 | `NLM_PORT` | `9333` | Local port the server uses to control Chrome |
+| `NLM_DOWNLOADS` | `~/Downloads/NotebookLM` | Where `nlm_download` saves files |
 
 ## Privacy
 
