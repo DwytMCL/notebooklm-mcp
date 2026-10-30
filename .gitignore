@@ -1,0 +1,7 @@
+node_modules/
+# never commit a browser profile or cookies
+profile/
+.notebooklm-mcp/
+*.cookies
+.env
+.DS_Store

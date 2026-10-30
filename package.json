@@ -1,0 +1,31 @@
+{
+  "name": "notebooklm-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that lets Claude and other AI agents use Google NotebookLM (Gemini Notebook) through a real browser, with a free account",
+  "main": "server.js",
+  "scripts": {
+    "test": "node selfcheck.js"
+  },
+  "keywords": [
+    "mcp",
+    "notebooklm",
+    "claude"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "playwright-core": "^1.64.1",
+    "zod": "^4.6.7"
+  },
+  "bin": {
+    "notebooklm-mcp": "server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DwytMCL/notebooklm-mcp.git"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
