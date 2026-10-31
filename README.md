@@ -57,6 +57,10 @@ npx -y notebooklm-browser-mcp login
 Sign in, check your notebooks load, then **quit that window** (Cmd+Q / close all windows).
 The server cannot attach while the sign-in window is still open.
 
+Sign in separately for each tool. Never copy a signed-in profile folder to another browser or
+server: Google sees the same session in two browsers, revokes it, and both come back signed out
+after the next restart.
+
 ### Claude Code
 
 ```bash
